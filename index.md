@@ -17,6 +17,10 @@ features:
     linkText: View Project
   - title: I built a Python project manager in one night
     details: What happens when uv sells to OpenAI and one engineer decides to ship an alternative.
-    link: /pyr
+    link: /python-project-manager.md
+    linkText: Read More
+  - title: The app convention
+    details: Why every pyr project starts with the same structure - and why Python imports finally just work.
+    link: /app-convention.md
     linkText: Read More
 ---

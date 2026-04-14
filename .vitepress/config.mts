@@ -9,13 +9,16 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: "Home", link: "/" },
-      { text: "Projects", link: "/pyr" },
+      { text: "Projects", link: "/python-project-manager" },
     ],
 
     sidebar: [
       {
         text: "Projects",
-        items: [{ text: "pyr", link: "/pyr" }],
+        items: [
+          { text: "Python Project Manager", link: "/python-project-manager" },
+          { text: "How pyr Works", link: "/how-pyr-works" },
+        ],
       },
     ],
 

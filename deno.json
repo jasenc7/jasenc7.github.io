@@ -3,5 +3,10 @@
   "imports": {
     "vitepress": "npm:vitepress@^1.6.4",
     "vue": "npm:vue@^3.5.32"
+  },
+  "tasks": {
+    "dev": "deno run -A npm:vitepress dev",
+    "build": "deno run -A npm:vitepress build",
+    "preview": "deno run -A npm:vitepress preview"
   }
 }
