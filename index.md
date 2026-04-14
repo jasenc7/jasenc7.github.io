@@ -12,7 +12,11 @@ hero:
 
 features:
   - title: pyrun.dev
-    details: Python without the ceremony. A project manager that bootstraps its own runtime
+    details: Python without the ceremony. A project manager that bootstraps its own runtime.
     link: https://pyrun.dev
     linkText: View Project
+  - title: I built a Python project manager in one night
+    details: What happens when uv sells to OpenAI and one engineer decides to ship an alternative.
+    link: /pyr
+    linkText: Read More
 ---
