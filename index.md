@@ -19,8 +19,8 @@ features:
     details: What happens when uv sells to OpenAI and one engineer decides to ship an alternative.
     link: /python-project-manager.md
     linkText: Read More
-  - title: The app convention
-    details: Why every pyr project starts with the same structure - and why Python imports finally just work.
-    link: /app-convention.md
+  - title: How pyr Works
+    details: A look under the hood at a tool that manages Python without being Python.
+    link: /how-pyr-works.md
     linkText: Read More
 ---
