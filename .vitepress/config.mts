@@ -2,6 +2,16 @@ import { defineConfig } from "vitepress";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
+  head: [
+    [
+      "script",
+      {
+        defer: "",
+        src: "https://static.cloudflareinsights.com/beacon.min.js",
+        "data-cf-beacon": '{"token": "b728e1cb68824e8bb039eac45bfc1568"}',
+      },
+    ],
+  ],
   appearance: "dark",
   title: "Jasen Carroll",
   description: "Bespoke software",
