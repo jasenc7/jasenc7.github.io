@@ -1,16 +1,21 @@
+---
+title: "How pyr works"
+date: 2026-04-15
+---
+
 # How pyr works
 
 A look under the hood at a tool that manages Python without being Python.
 
 ## The binary
 
-pyr is written in TypeScript and compiled to a native binary with `deno compile`. This is a deliberate choice. The tool that manages your Python environment can't depend on Python to install itself — that's the circular dependency that makes Poetry painful to bootstrap. Rust (like uv) solves this but comes with slow compile times and a steeper barrier to contribution. Deno gives you a single compiled binary with no runtime dependency, and the development loop stays fast.
+pyr is written in TypeScript and compiled to a native binary with `deno compile`. This is a deliberate choice. The tool that manages your Python environment can't depend on Python to install itself - that's the circular dependency that makes Poetry painful to bootstrap. Rust (like uv) solves this but comes with slow compile times and a steeper barrier to contribution. Deno gives you a single compiled binary with no runtime dependency, and the development loop stays fast.
 
 The entire tool is two files: `main.ts` (the CLI dispatcher, ~170 lines) and `lib.ts` (everything else, ~1280 lines). There's no framework. The CLI is a hand-rolled command registry with a parse-dispatch loop. Dependencies are minimal: `@std/cli` for argument parsing and spinners, `@std/toml` for reading pyproject.toml.
 
 ## Bootstrapping Python
 
-On first use, pyr downloads a standalone CPython build from the [python-build-standalone](https://github.com/astral-sh/python-build-standalone) project into `~/.pyr/python/`. These are self-contained CPython distributions — no system dependencies, no compilation, no brew or apt. pyr detects your platform and architecture, fetches the appropriate tarball, extracts it, and writes a `.version` stamp file.
+On first use, pyr downloads a standalone CPython build from the [python-build-standalone](https://github.com/astral-sh/python-build-standalone) project into `~/.pyr/python/`. These are self-contained CPython distributions - no system dependencies, no compilation, no brew or apt. pyr detects your platform and architecture, fetches the appropriate tarball, extracts it, and writes a `.version` stamp file.
 
 This happens once. Every project on your machine shares the same managed Python. When you run `pyr upgrade --python`, the old install is replaced and every project's venv rebuilds itself on next use (more on that below).
 
@@ -20,7 +25,7 @@ The bootstrap probes GitHub's API before doing anything destructive. If the netw
 
 Every project gets a `.venv` created from the managed Python via the standard `python -m venv` mechanism. pyr writes a stamp file at `.venv/.pyr-python` containing the CPython version that created the venv.
 
-On every command that touches the venv, pyr compares this stamp against the managed Python's version. If they differ — because you ran `pyr upgrade --python` — pyr deletes the old venv, creates a new one from the updated Python, and reinstalls everything from `requirements.txt`. This happens silently. You don't manage venvs. pyr manages venvs.
+On every command that touches the venv, pyr compares this stamp against the managed Python's version. If they differ - because you ran `pyr upgrade --python` - pyr deletes the old venv, creates a new one from the updated Python, and reinstalls everything from `requirements.txt`. This happens silently. You don't manage venvs. pyr manages venvs.
 
 The venv is project-local (always `.venv/` in the project root) and gitignored by default. It's disposable. Delete it, run any pyr command, and it rebuilds.
 
@@ -34,9 +39,9 @@ This is a conscious trade-off. pip's resolver is slower than uv's custom Rust re
 
 ## Orphan pruning
 
-After installing, pyr identifies packages that are installed but no longer needed. It does this by asking pip for the "leaf" packages — packages nothing else depends on — via `pip list --not-required --format=json`.
+After installing, pyr identifies packages that are installed but no longer needed. It does this by asking pip for the "leaf" packages - packages nothing else depends on - via `pip list --not-required --format=json`.
 
-A leaf package is an orphan if it's not in the user's declared dependencies and not a protected package (pip, setuptools, wheel — removing these breaks the venv).
+A leaf package is an orphan if it's not in the user's declared dependencies and not a protected package (pip, setuptools, wheel - removing these breaks the venv).
 
 Removing a leaf can promote its former dependents to leaf status. pyr handles this by pruning iteratively: remove orphans, recompute leaves, remove new orphans, repeat. The loop is bounded at 16 iterations. In practice it converges in 2-3.
 
@@ -50,7 +55,7 @@ Protected packages (pip, setuptools, wheel) are filtered from the lock. Editable
 
 ## TOML surgery
 
-When `pyr add` or `pyr remove` modifies `pyproject.toml`, it doesn't parse the entire file into an AST, modify it, and serialize it back. That approach — used by most tools — destroys comments, reorders keys, and normalizes whitespace. Your carefully formatted pyproject.toml comes back looking like it was written by a machine.
+When `pyr add` or `pyr remove` modifies `pyproject.toml`, it doesn't parse the entire file into an AST, modify it, and serialize it back. That approach - used by most tools - destroys comments, reorders keys, and normalizes whitespace. Your carefully formatted pyproject.toml comes back looking like it was written by a machine.
 
 Instead, pyr does surgical editing. It:
 
@@ -64,7 +69,7 @@ Instead, pyr does surgical editing. It:
 
 Everything outside the `dependencies` array is untouched. Your comments survive. Your formatting survives. Your other sections survive. The splice is byte-perfect.
 
-If the `[project]` table exists but has no `dependencies` key, pyr inserts one immediately after the table header. If `[project]` is missing entirely, pyr errors — it doesn't own pyproject.toml, and creating structural sections would be overstepping.
+If the `[project]` table exists but has no `dependencies` key, pyr inserts one immediately after the table header. If `[project]` is missing entirely, pyr errors - it doesn't own pyproject.toml, and creating structural sections would be overstepping.
 
 ## Requirement parsing
 
@@ -78,7 +83,7 @@ pyr needs to extract canonical package names from requirement specs in several c
 
 Names are canonicalized per PEP 503: lowercased, with runs of hyphens, underscores, and dots collapsed to a single hyphen. So `Foo-Bar`, `foo_bar`, and `foo.bar` all become `foo-bar`.
 
-Editable installs (`-e ./path`) and bare local paths are intentionally unparseable — the package name isn't derivable without reading the target's metadata, and pyr doesn't go that far.
+Editable installs (`-e ./path`) and bare local paths are intentionally unparseable - the package name isn't derivable without reading the target's metadata, and pyr doesn't go that far.
 
 ## Self-upgrade
 
@@ -100,7 +105,7 @@ The `GITHUB_TOKEN` environment variable is respected for API requests, avoiding 
 
 `pyr run` checks whether `pyproject.toml` has been modified more recently than `requirements.txt` by comparing filesystem mtimes. If the toml is newer, it runs a quiet sync before executing the script.
 
-This means you can hand-edit `pyproject.toml`, add a dependency to the `[project].dependencies` array, and immediately run `pyr run`. The dependency is resolved, installed, locked, and your script runs — in one command, with no manual sync step.
+This means you can hand-edit `pyproject.toml`, add a dependency to the `[project].dependencies` array, and immediately run `pyr run`. The dependency is resolved, installed, locked, and your script runs - in one command, with no manual sync step.
 
 ## Platform support
 
@@ -112,7 +117,7 @@ pyr builds for five targets:
 - `aarch64-unknown-linux-gnu` (Linux ARM64)
 - `x86_64-pc-windows-msvc` (Windows x86_64)
 
-Each target is compiled on a native runner for its OS — macOS builds run on macOS, Linux builds on Linux, Windows builds on Windows. Architecture variants within the same OS use `deno compile --target`. The CI pipeline builds all five, smoke-tests three (macOS ARM, Linux x86_64, Windows x86_64) on native runners, and publishes them as release assets.
+Each target is compiled on a native runner for its OS - macOS builds run on macOS, Linux builds on Linux, Windows builds on Windows. Architecture variants within the same OS use `deno compile --target`. The CI pipeline builds all five, smoke-tests three (macOS ARM, Linux x86_64, Windows x86_64) on native runners, and publishes them as release assets.
 
 The install script (`install.sh` for Unix, `install.ps1` for Windows) detects the platform, downloads the correct zip, extracts the binary to `~/.pyr/bin/`, and prints the PATH line for your shell.
 

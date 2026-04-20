@@ -22,5 +22,5 @@ features:
   - title: How pyr Works
     details: A look under the hood at a tool that manages Python without being Python.
     link: /how-pyr-works.md
-    linkText: Read More
+    linkText: Read More.
 ---

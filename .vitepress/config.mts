@@ -28,6 +28,7 @@ export default defineConfig({
         items: [
           { text: "Python Project Manager", link: "/python-project-manager" },
           { text: "How pyr Works", link: "/how-pyr-works" },
+          { text: "Mistral Vibe Sandbox", link: "/mistral-vibe-sandbox" },
         ],
       },
     ],
