@@ -5,7 +5,7 @@ layout: home
 hero:
   name: ""
   text: "Jasen Carroll"
-  tagline: "I build tools and walk away from things that don't work - jobs, frameworks, ceremony. Currently: independent software. Previously: a W-2 I outgrew."
+  tagline: "I build tools and walk away from things that don't work - jobs, frameworks, ceremony. Currently: independent software."
   image:
     src: /logo.svg
 
