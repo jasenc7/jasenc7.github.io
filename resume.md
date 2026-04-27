@@ -6,6 +6,8 @@ aside: false
 
 # Resume
 
+See social links for contact information.
+
 ## Summary
 
 Full stack developer with a decade of engineering experience in regulated software environments. Background spans UAT ownership, SDLC participation, Agile delivery, and AI/ML model validation at Philips under FDA consent decree. Now building full-time — current project is pyr (pyrun.dev), an open-source Python runtime manager built in TypeScript on Deno with cross-platform CI/CD. Stack includes React, JavaScript/TypeScript, Python, PostgreSQL, and Node.js. BS Mechanical Engineering (Drexel), EMBA (Quantic), MSSE candidate 2026.

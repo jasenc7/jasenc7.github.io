@@ -34,6 +34,9 @@ export default defineConfig({
       },
     ],
 
-    socialLinks: [{ icon: "github", link: "https://github.com/jasenc7/" }],
+    socialLinks: [
+      { icon: "github", link: "https://github.com/jasenc7/" },
+      { icon: "linkedin", link: "https://www.linkedin.com/in/jasenc/" },
+    ],
   },
 });
