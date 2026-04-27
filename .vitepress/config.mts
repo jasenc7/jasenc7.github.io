@@ -20,6 +20,7 @@ export default defineConfig({
     nav: [
       { text: "Home", link: "/" },
       { text: "Writing", link: "/python-project-manager" },
+      { text: "Resume", link: "/resume" },
     ],
 
     sidebar: [
