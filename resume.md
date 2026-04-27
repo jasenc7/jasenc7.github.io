@@ -21,7 +21,7 @@ Polyglot developer — academically trained in Java and C++, originally bootcamp
 - **Database:** PostgreSQL
 - **APIs:** RESTful API design and integration
 - **Tooling:** Git, CI/CD, Deno
-- **AI:** Early adopter — built tooling around frontier models, including a proxy to route between Mistral, Claude, and others. (Including home grown solutions, i.e. [chat-responses-proxy](https://github.com/jasenc7/chat-responses-proxy).)
+- **AI:** Early adopter — built tooling around frontier models, including a [chat-responses-proxy](https://github.com/jasenc7/chat-responses-proxy) to route between Mistral, Claude, and others.
 
 ## Education
 
@@ -52,7 +52,7 @@ Building and maintaining open-source developer tools.
 
 ## Projects
 
-**QMS Assistant** — [rag.jasencarroll.com](https://rag.jasencarroll.com)
+**QMS Assistant** — [qms.jasencarroll.com](https://qms.jasencarroll.com)
 A publicly queryable AI assistant over a Software as a Medical Device (SaMD) Quality Management System corpus. Built on a RAG architecture — Flask API, Mistral embeddings, Chroma vector DB, top-k retrieval with citation injection. Domain expertise (12+ years FDA-regulated QMS) converted directly into a working AI product. Bootstrapped with pyr. Deployed to Railway.
 
 **Cafe Fausse** — [cafe-fausse.jasencarroll.com](https://cafe-fausse.jasencarroll.com)
