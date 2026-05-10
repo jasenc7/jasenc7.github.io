@@ -1,17 +1,48 @@
 ---
 layout: doc
 sidebar: false
-aside: false
 ---
 
-# Resume
+# Hire Me
 
-- [PDF Version](/apr-2026-jasen-carroll.pdf)
+Fractional engineer who reduces delivery risk, handles scoped implementation work, and gives founders more leverage without requiring them to spend their days as a software engineer.
 
+For contact information, rates, and experience, please refer to the following two PDFs. 
+- [Service Offerings](/service-offerings.pdf)
+- [PDF Resume](/apr-2026-jasen-carroll.pdf)
 
-## Summary
+## Service Offerings
+
+Clearly scoped B2B relationships with defined deliverables, access boundaries, communication norms, and either party able to end the arrangement cleanly.
+
+First, a paid entry audit. $2,000 for two weeks, capped scope, approximately 15 hours. Review the current repo, architecture, deployment, dependency/security posture, backlog, and dev workflow. Deliverables: a written technical assessment, a prioritized project list. Optional: within the 15 hours, one small, merged PR to prove the working relationship. Audit considered complete on delivery of the written assessment. Payment of 50% upfront, and 50% Net 7 after delivery.
+
+Then, monthly tiers:
+
+| Retainer | Monthly fee | Scope |
+|---|---|---|
+| Advisory Engineer | $2,750 | 20 hrs/month: calls, async review, architecture/product guidance, dependency updates, small fixes, and lightweight releases |
+| Fractional Engineer | $5,500 | 40 hrs/month: implementation, CI/CD, QA, technical debt, scoped roadmap items |
+| Technical Lead | $8,250 | 60 hrs/month: feature delivery, technical planning, architecture decisions, code review leadership, release coordination |
+| Engineering Partner | $11,000 | 80 hrs/month: embedded engineering, architecture ownership, roadmap execution, release management |
+
+## Summary of Experience
 
 Full stack developer with a decade of engineering experience in regulated engineering environments. Background spans UAT ownership, SDLC participation, Agile delivery, and AI/ML model validation at Philips under FDA consent decree. Now building full-time, current project is [pyr](https://pyrun.dev), an open-source Python runtime manager built in TypeScript on Deno with cross-platform CI/CD. Stack includes React, JavaScript/TypeScript, Python, PostgreSQL, and Node.js. BS Mechanical Engineering (Drexel), EMBA (Quantic), MSSE candidate 2026.
+
+## Projects
+
+**QMS Assistant** - [qms.jasencarroll.com](https://qms.jasencarroll.com)
+A publicly queryable AI assistant over a Software as a Medical Device (SaMD) Quality Management System corpus. Built on a RAG architecture - Flask API, Mistral embeddings, Chroma vector DB, top-k retrieval with citation injection. Domain expertise (12+ years FDA-regulated QMS) converted directly into a working AI product. Bootstrapped with pyr. Deployed to Railway.
+
+**Cafe Fausse** - [cafe-fausse.jasencarroll.com](https://cafe-fausse.jasencarroll.com)
+Full stack restaurant reservation system. React + Vite frontend, Flask + SQLAlchemy backend, PostgreSQL, deployed to Railway with GitHub Actions CI/CD. CORS-controlled API, table availability logic, newsletter signup, production-grade entrypoint with gunicorn.
+
+**Goodware** - [goodware.jasencarroll.com](https://goodware.jasencarroll.com)
+Anomaly detection toolkit trained on 50,000+ labeled executable samples - applicable to fleet telemetry, risk, and insurance domains. Python, scikit-learn, PyTorch MLP, XGBoost, LightGBM. Flask web app with CSV upload, `/predict` API endpoint, AUC/accuracy reporting, and confusion matrix. Full CI/CD with gated deployment on Railway.
+
+**Recipe Recommender** - [recipe-recommender.jasencarroll.com](https://recipe-recommender.jasencarroll.com)
+Full stack ML recommendation engine trained on 41,932 Food.com recipes using K-means clustering. React + Vite + Tailwind + shadcn/ui frontend, FastAPI + Uvicorn backend, scikit-learn pipeline with serialized joblib model artifacts for instant inference. Multi-stage Docker build, GitHub Actions CI/CD with lint/test/build gates, deployed to Railway.
 
 ## Skills
 
@@ -50,20 +81,6 @@ Building and maintaining open-source developer tools.
 - Designed and shipped pyr (pyrun.dev) - a Python project manager that bootstraps its own CPython runtime, manages virtualenvs, and gets out of the way. Six commands. One binary. No Python required to install.
 - Built in TypeScript, compiled with Deno, cross-platform CI/CD across Linux, macOS, and Windows.
 - Key design decision: rather than rolling a custom package resolver, designed `pyr sync` to reconcile declared dependencies against the installed virtualenv state using pip as the resolver - constraint-driven architecture.
-
-## Projects
-
-**QMS Assistant** - [qms.jasencarroll.com](https://qms.jasencarroll.com)
-A publicly queryable AI assistant over a Software as a Medical Device (SaMD) Quality Management System corpus. Built on a RAG architecture - Flask API, Mistral embeddings, Chroma vector DB, top-k retrieval with citation injection. Domain expertise (12+ years FDA-regulated QMS) converted directly into a working AI product. Bootstrapped with pyr. Deployed to Railway.
-
-**Cafe Fausse** - [cafe-fausse.jasencarroll.com](https://cafe-fausse.jasencarroll.com)
-Full stack restaurant reservation system. React + Vite frontend, Flask + SQLAlchemy backend, PostgreSQL, deployed to Railway with GitHub Actions CI/CD. CORS-controlled API, table availability logic, newsletter signup, production-grade entrypoint with gunicorn.
-
-**Goodware** - [goodware.jasencarroll.com](https://goodware.jasencarroll.com)
-Anomaly detection toolkit trained on 50,000+ labeled executable samples - applicable to fleet telemetry, risk, and insurance domains. Python, scikit-learn, PyTorch MLP, XGBoost, LightGBM. Flask web app with CSV upload, `/predict` API endpoint, AUC/accuracy reporting, and confusion matrix. Full CI/CD with gated deployment on Railway.
-
-**Recipe Recommender** - [recipe-recommender.jasencarroll.com](https://recipe-recommender.jasencarroll.com)
-Full stack ML recommendation engine trained on 41,932 Food.com recipes using K-means clustering. React + Vite + Tailwind + shadcn/ui frontend, FastAPI + Uvicorn backend, scikit-learn pipeline with serialized joblib model artifacts for instant inference. Multi-stage Docker build, GitHub Actions CI/CD with lint/test/build gates, deployed to Railway.
 
 ---
 

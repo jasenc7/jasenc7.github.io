@@ -20,7 +20,7 @@ export default defineConfig({
     nav: [
       { text: "Home", link: "/" },
       { text: "Writing", link: "/python-project-manager" },
-      { text: "Resume", link: "/resume" },
+      { text: "Hire Me", link: "/hire-me" },
     ],
 
     sidebar: [
@@ -37,7 +37,6 @@ export default defineConfig({
     socialLinks: [
       { icon: "github", link: "https://github.com/jasenc7/" },
       { icon: "linkedin", link: "https://www.linkedin.com/in/jasenc/" },
-      { icon: "bluesky", link: "https://bsky.app/profile/jasenc.com" },
     ],
   },
 });
