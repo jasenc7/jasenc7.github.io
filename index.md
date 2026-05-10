@@ -27,7 +27,7 @@ features:
     details: Anomaly detection toolkit trained on 50,000+ labeled executable samples - applicable to fleet telemetry, risk, and insurance domains.
     link: https://goodware.jasencarroll.com
     linkText: View Project
-  - title: I built a Python project manager in one night
+  - title: Recipe Recommender
     details: Full stack ML recommendation engine trained on 41,932 Food.com recipes using K-means clustering.
     link: https://recipe-recommender.jasencarroll.com/
     linkText: View Project
