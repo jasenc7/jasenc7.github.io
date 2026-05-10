@@ -35,7 +35,7 @@ features:
     details: A look uat how to sandbox Mistral's Vibe CLI.
     link: /mistral-vibe-sandbox.md
     linkText: Read More
-  - title: pyrun.dev
+  - title: pyr
     details: Python without the ceremony. A project manager that bootstraps its own runtime.
     link: https://pyrun.dev
     linkText: View Project
