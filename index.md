@@ -5,16 +5,12 @@ layout: home
 hero:
   name: ""
   text: "Jasen Carroll"
-  tagline: "Fractional engineer who reduces delivery risk, handles scoped implementation work, and gives founders more leverage without requiring them to spend their days as a software engineer."
+  tagline: "Quality & validation engineer in FDA-regulated device and pharma. I also build software: developer tooling, classical ML, RAG systems, and web apps for small businesses. Key strengths: documentation and explaining complex systems in plain terms."
   image:
     src: /logo.svg
 
 
 features:
-  - title: Hire Me
-    details: An overview of how I am available for hire and what my resume looks like.
-    link: /hire-me.md
-    linkText: Read More
   - title: QMS Assistant
     details: A publicly queryable AI assistant over a SaMD QMS. Built on a RAG architecture.
     link: https://qms.jasencarroll.com
@@ -32,7 +28,7 @@ features:
     link: https://recipe-recommender.jasencarroll.com/
     linkText: View Project
   - title: Mistral Vibe Sandbox
-    details: A look uat how to sandbox Mistral's Vibe CLI.
+    details: A look at how to sandbox Mistral's Vibe CLI.
     link: /mistral-vibe-sandbox.md
     linkText: Read More
   - title: pyr
