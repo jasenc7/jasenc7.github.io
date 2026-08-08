@@ -1,9 +1,9 @@
 ---
-title: "I built a Python project manager in one night"
+title: "I built a Python project manager in one night. Making it releasable took longer."
 date: 2026-04-14
 ---
 
-# I built a Python project manager in one night
+# I built a Python project manager in one night. Making it releasable took longer.
 
 On March 19, OpenAI announced it was acquiring Astral - the company behind uv, Ruff, and ty. Three tools that had quietly become load-bearing infrastructure for modern Python development. The Astral team joins Codex. The tools stay MIT-licensed. The roadmap now serves OpenAI.
 
@@ -40,9 +40,9 @@ I built it in TypeScript, compiled to native binaries with `deno compile`. One s
 
 I used Claude Code as a co-pilot. I'm going to be direct about that because I think the instinct to hide it is wrong. The architecture - the decisions about what to delegate to pip vs what to own, the surgical TOML editing that preserves your file byte-for-byte instead of round-tripping through a serializer, the venv version stamping that triggers automatic rebuilds - that's judgment. The LLM is leverage on the implementation. The same way a compiler is leverage on machine code.
 
-The output is a cross-platform CLI with CI/CD that builds and smoke-tests on macOS, Linux, and Windows, a marketing site, a GitHub release pipeline, and documentation. From one person. In one night.
+The night produced a tool that worked on my machine. Everything after that was the part that doesn't fit in a headline: CI that builds five targets and smoke-tests three of them on native macOS, Linux, and Windows runners, an install script that has to be correct on all five, a release pipeline, and documentation. That took considerably longer than the build, and it's the only reason anyone else can run this.
 
-I'm not saying this to brag. I'm saying it because the economics of what one engineer can ship have changed and most people haven't caught up to that yet.
+I do quality and validation for a living, so I'll be plain about the distinction. Writing the tool is a demo. Evidence that it does the same thing on a machine you've never seen is a product. The economics of what one engineer can build have changed. What it costs to make that thing trustworthy has not moved nearly as much, and that gap is where most of this work actually lives.
 
 ## Why it matters now
 

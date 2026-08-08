@@ -19,13 +19,17 @@ export default defineConfig({
     // https://vitepress.dev/reference/default-theme-config
     nav: [
       { text: "Home", link: "/" },
-      { text: "Writing", link: "/python-project-manager" },
+      { text: "Writing", link: "/local-assistant" },
     ],
 
     sidebar: [
       {
         text: "Writing",
         items: [
+          { text: "An AI Assistant That Can't Phone Home", link: "/local-assistant" },
+          { text: "The CSQE, and a Signed Certificate", link: "/asq-csqe" },
+          { text: "Milky - Night Sky Forecast", link: "/milky" },
+          { text: "The Aurora Map Is Two Rectangles", link: "/aurora-map-projection" },
           { text: "Python Project Manager", link: "/python-project-manager" },
           { text: "How pyr Works", link: "/how-pyr-works" },
           { text: "Mistral Vibe Sandbox", link: "/mistral-vibe-sandbox" },

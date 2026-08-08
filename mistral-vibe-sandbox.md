@@ -5,7 +5,7 @@ date: 2026-04-20
 
 # I sandboxed Mistral's Vibe in an afternoon
 
-I caught a live security bug before I even opened a terminal.
+I caught a live security bug before I even opened a terminal. I wasn't testing anything. I was a user flipping a toggle in a settings panel, and the toggle didn't do what it said. Everything below is what I saw in normal use — no probing, no reverse engineering, nothing I wasn't already entitled to run on my own machine.
 
 Perplexity ships a desktop app called Computer. It has toggles for filesystem access, Mail, Notes, GitHub. I turned filesystem off. The AI kept reading my files. I restarted the app. Still reading. I watched it list the contents of `~/dev/chat-responses-proxy` in real time with the toggle disabled, while the diagnostic showed `pplx_device__filesystem` still connected.
 
@@ -79,17 +79,13 @@ The repo has a `.gitignore` that explicitly excludes `.vibe/logs/`, `.env` files
 
 ## What I learned
 
-The Perplexity Computer bug was real and reproducible. I didn't find it by auditing - I found it by using the product and noticing something that shouldn't have worked. The toggle not being the gate is a product decision that someone made consciously, probably because it made the demo better. The daemon holding the session through a UI restart is a different kind of failure - either a bug or a feature depending on whose interests you're weighing.
+The Perplexity Computer bug was real and reproducible, and as above, I found it by using the product rather than auditing it. The toggle not being the gate is a product decision that someone made consciously, probably because it made the demo better. The daemon holding the session through a UI restart is a different kind of failure - either a bug or a feature depending on whose interests you're weighing.
 
 The right response to "AI tools are shipping with inadequate sandboxing" is not to stop using them. It's to enforce the sandbox yourself at a layer the software can't override. The tooling to do this exists, it's not complicated, and it takes an afternoon.
 
 Most people haven't done it. That's the actual problem.
 
 ***
-
-The tooling to do this exists, it's not complicated, and it takes an afternoon.
-
-Most people haven't done it. That's the actual problem.
 
 *nono is at [github.com/always-further/nono](https://github.com/always-further/nono). LuLu is at [objective-see.org](https://objective-see.org/products/lulu.html).*
 
