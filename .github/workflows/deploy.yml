@@ -3,19 +3,25 @@ name: Deploy VitePress site to Pages
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
   contents: read
-  pages: write
-  id-token: write
 
 concurrency:
-  group: pages
-  cancel-in-progress: false
+  # Keep production deployments serialized without letting pull-request builds
+  # displace a queued deployment. New commits only supersede older runs for the
+  # same pull request.
+  group: ${{ github.event_name == 'pull_request' && format('verify-pr-{0}', github.event.pull_request.number) || 'pages' }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
-  build:
+  # Fleet-wide convention: the one status check branch protection names is
+  # `verify`. A pull request runs it and stops there; only a push to main
+  # goes on to deploy.
+  verify:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -31,9 +37,6 @@ jobs:
       - name: Install dependencies
         run: deno install --allow-scripts
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
       - name: Build with VitePress
         run: deno run -A npm:vitepress build
 
@@ -46,7 +49,11 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    needs: build
+    needs: verify
+    if: github.event_name != 'pull_request'
+    permissions:
+      pages: write
+      id-token: write
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to GitHub Pages
