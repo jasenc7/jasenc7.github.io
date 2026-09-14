@@ -3,6 +3,8 @@ name: Deploy VitePress site to Pages
 on:
   push:
     branches: [main]
+  pull_request:
+    branches: [main]
   workflow_dispatch:
 
 permissions:
@@ -15,7 +17,10 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  build:
+  # Fleet-wide convention: the one status check branch protection names is
+  # `verify`. A pull request runs it and stops there; only a push to main
+  # goes on to deploy.
+  verify:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -46,7 +51,8 @@ jobs:
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    needs: build
+    needs: verify
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     steps:
       - name: Deploy to GitHub Pages
