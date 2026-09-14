@@ -11,8 +11,11 @@ permissions:
   contents: read
 
 concurrency:
-  group: pages
-  cancel-in-progress: false
+  # Keep production deployments serialized without letting pull-request builds
+  # displace a queued deployment. New commits only supersede older runs for the
+  # same pull request.
+  group: ${{ github.event_name == 'pull_request' && format('verify-pr-{0}', github.event.pull_request.number) || 'pages' }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
   # Fleet-wide convention: the one status check branch protection names is
