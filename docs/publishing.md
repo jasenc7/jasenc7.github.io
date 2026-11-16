@@ -38,6 +38,8 @@ deno task build
 | `verify` | every trigger, `ubuntu-latest` | checkout (full history), set up Deno `v2.x`, `deno install --allow-scripts`, build, then upload `.vitepress/dist` with `actions/upload-pages-artifact@v4` |
 | `deploy` | everything except pull requests, `ubuntu-latest` | `actions/deploy-pages@v5` into the `github-pages` environment, with `pages: write` and `id-token: write` |
 
+`workflow_dispatch` has no branch filter, and `deploy` is skipped only for pull requests. A manual run therefore builds and deploys whatever ref it was started from, which need not be `main`. The only thing that can stop that is the `github-pages` environment's deployment-branch rule, which lives in repository settings rather than in this workflow.
+
 A pull request stops after `verify`: the site is built and an artifact uploaded, but nothing is deployed. `verify` is the status check that branch protection requires, according to the comment in the workflow.
 
 Concurrency:
@@ -55,15 +57,22 @@ A deployment publishes the whole built site, not individual changed files:
 - the hashed JS/CSS bundles under `assets/`
 - everything from `public/`, at the site root
 
-The visible effect is that `https://jasencarroll.com/` serves the version of `main` that was built, with the assets it links to. The `docs/` pages are part of that output: `/docs/publishing.html` and `/docs/domain-map.html`.
+The visible effect is that `https://jasencarroll.com/` serves the revision the most recent deploying run was built from, with the assets it links to:
+
+- **Push to `main`:** the pushed `main` commit.
+- **Manual run (`workflow_dispatch`):** whatever ref was selected when the run was started, which may be a branch other than `main`.
+
+Production matches `main` only if the most recent deployment came from `main`. Check the run behind the current `github-pages` deployment rather than assuming.
+
+The `docs/` pages are part of that output: `/docs/publishing.html` and `/docs/domain-map.html`.
 
 ## Rollback
 
 Roll back with the same workflow. Don't hand-edit a deployment, and don't touch Pages settings, `CNAME` or DNS to undo a content change.
 
-1. **Within the artifact's lifetime (1 day by default):** open the last good run of the workflow on `main` and re-run its `deploy` job. This redeploys that run's complete `github-pages` artifact. It fails once the artifact has expired.
+1. **Within the artifact's lifetime (1 day by default):** open the last good deploying run and re-run its `deploy` job. This redeploys that run's complete `github-pages` artifact, built from that run's ref, so pick a run whose ref is the one you want live. It fails once the artifact has expired.
 2. **Otherwise:** revert only the commit or commits that introduced the bad change on `main` (with `git revert` via a pull request, not a history rewrite). Unrelated article edits made since are kept. The push to `main` rebuilds and deploys through the normal path.
-3. To rebuild and redeploy `main` as it stands without a new commit, run the workflow manually (`workflow_dispatch`) on `main`.
+3. To rebuild and redeploy `main` as it stands without a new commit, run the workflow manually (`workflow_dispatch`) with `main` selected as the branch. Starting it from any other ref deploys that ref instead.
 
 After any of these, confirm the `deploy` job succeeded and that the `github-pages` environment points at the expected run.
 
