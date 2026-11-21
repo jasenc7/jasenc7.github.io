@@ -36,11 +36,11 @@ score = 10
       − precipPenalty(probability)
 ```
 
-Clamped to 0–10, one decimal. Low cloud carries extra weight on top of total cloud, because thin high cirrus still lets the band through and a low deck does not. The moon penalty only applies when the moon is actually above the horizon — a full moon that already set costs you nothing, and treating phase alone as the input would have been wrong on exactly the nights you care about.
+Clamped to 0–10, one decimal. Low cloud carries extra weight on top of total cloud, because thin high cirrus still lets the band through and a low deck does not. The moon penalty only applies when the moon is above the horizon at the middle of the night — a full moon that has set by then costs you nothing, and treating phase alone as the input would have been wrong on exactly the nights you care about. It's one sample, not an hour-by-hour sum, so a moon that sets at 11 p.m. still washed out your early evening and the score won't say so.
 
 One detail I'd defend in a review: penalty inputs are averaged across the night's hours *first*, then penalized once. Penalizing hour by hour and averaging the scores gives a different answer, and a worse one — it lets one clear hour in an overcast night look like a real window.
 
-Two things it does not do, stated plainly because the app doesn't hide them either. There's no light pollution term — a Bortle-scale input was scoped and cut, so the score is weather and moon only, and it will happily tell you it's a 9 in the middle of a city. And air temperature isn't fetched, so the humidity penalty approximates it as dew point + 8 °C to estimate relative humidity. That's a defensible nighttime spread and it's still an approximation standing in for a measurement.
+Two things it does not do, stated plainly because the app doesn't hide them either. There's no light pollution term — a Bortle-scale input was scoped and cut, so the score is weather and moon only, and it will happily tell you it's a 9 in the middle of a city. And air temperature isn't fetched, so the humidity penalty approximates it as dew point + 8 °C to estimate relative humidity. Follow that through and the estimate is always 60%, under the 70% where the penalty starts, so the humidity term currently costs zero points on every night. It's in the formula and inert until temperature is fetched, which is a better thing to admit than to leave for a reader to find.
 
 ## The moon data that didn't exist
 
@@ -58,7 +58,7 @@ Two traps came with it.
 
 ## What I tested and why
 
-Seven test files, 44 tests, green in CI on every push.
+Ten test files, 107 tests, green in CI on every push.
 
 The engine/service split exists to make this cheap: everything in `engine/` is pure computation with no I/O, so tests are inputs and assertions with no mocking framework anywhere. Each service exports its `parse()` separately from its fetch, so response shapes get tested as inline fixtures. Error paths monkeypatch `globalThis.fetch` inside `try/finally`, so a failing assertion can't leak a broken fetch into the next test.
 
